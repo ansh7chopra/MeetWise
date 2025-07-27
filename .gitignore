@@ -1,0 +1,44 @@
+# === Python virtual environments ===
+.venv/
+venv/
+env/
+
+# === Python cache files ===
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.pyo
+
+# === OS/system files ===
+.DS_Store
+Thumbs.db
+
+# === Streamlit cache ===
+.streamlit/
+
+# === Logs and temp ===
+*.log
+*.tmp
+
+# === Audio/video files ===
+*.wav
+*.mp3
+*.mp4
+*.m4a
+
+# === Model/weights files (optional) ===
+*.pt
+*.onnx
+*.bin
+
+# === Jupyter notebook checkpoints ===
+.ipynb_checkpoints/
+
+# === IDE/editor folders ===
+.vscode/
+.idea/
+
+# === Environment variable files ===
+.env
+.env.*
