@@ -39,7 +39,7 @@ Built using **OpenAI Whisper**, **LLMs**, and **Streamlit**, MeetWise simplifies
 git clone https://github.com/yourusername/MeetWise.git
 cd MeetWise
 
-
+---
 🙋‍♂️ Author
 @ansh7chopra
 Built with ❤️ as part of an AI/LLM project portfolio.
