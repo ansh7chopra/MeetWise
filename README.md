@@ -40,6 +40,7 @@ git clone https://github.com/yourusername/MeetWise.git
 cd MeetWise
 
 ---
-🙋‍♂️ Author
+
+## 🙋‍♂️ Author
 @ansh7chopra
 Built with ❤️ as part of an AI/LLM project portfolio.
