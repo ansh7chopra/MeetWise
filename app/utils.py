@@ -1,4 +1,3 @@
-# app/utils.py
 import os
 from datetime import datetime
 from groq import Groq
@@ -28,7 +27,7 @@ def query_llm(transcript: str, prompt: str) -> str:
 
 {prompt}
 
-Here is the meeting transcript:
+ meeting transcript:
 {transcript}
 """
     print("=== DEBUG: Sending to LLM ===")

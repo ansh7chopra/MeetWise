@@ -14,12 +14,12 @@ def transcribe_audio(file, diarize=False):
         tmp.write(file.read())
         audio_path = tmp.name
 
-    # Step 1: Transcribe
+    #  Transcribe
     result = model.transcribe(audio_path)
     segments = result["segments"]
     full_text = " ".join([seg["text"].strip() for seg in segments])
 
-    # Step 2: Diarization (optional)
+    #  Diarization 
     if diarize:
         align_model = whisperx.AlignmentModel(
             language_code=result.get("language", "en"),
