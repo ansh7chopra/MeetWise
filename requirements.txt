@@ -1,5 +1,7 @@
 streamlit
-openai
-whisper
+groq
+whisperx
+torch
 torchaudio
-
+pandas
+numpy
