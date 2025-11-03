@@ -6,7 +6,8 @@ load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
-MODEL = "llama3-8b-8192"  
+MODEL = "llama-3.1-8b-instant"
+ 
 
 def query_llm(prompt: str) -> str:
     if not GROQ_API_KEY:

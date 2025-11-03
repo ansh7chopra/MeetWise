@@ -1,6 +1,8 @@
 import streamlit as st
 from app.transcription import transcribe_audio
 from app.utils import query_llm
+from app.transcription import transcribe_audio
+
 
 def main():
     st.set_page_config(page_title="MeetWise - AI Meeting Assistant")
