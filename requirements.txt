@@ -1,7 +1,5 @@
 streamlit
 groq
-whisperx
-torch
-torchaudio
+python-dotenv
 pandas
 numpy
