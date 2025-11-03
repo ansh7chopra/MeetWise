@@ -5,54 +5,87 @@ from app.utils import query_llm
 st.set_page_config(page_title="MeetWise AI", layout="wide")
 
 def apply_style():
-    st.markdown("""
-    <style>
-    .stApp {
-        background: linear-gradient(135deg, #e0f7fa, #e8eaf6);
-        color: #1a1a1a;
-    }
+    st.markdown(
+        """
+        <style>
+        /* Background Gradient */
+        .stApp {
+            background: linear-gradient(135deg, #e8f3ff 0%, #ffffff 100%);
+        }
 
-    .block-container {
-        max-width: 95% !important;
-        padding-top: 2rem;
-    }
+        /* Title */
+        h1 {
+            text-align: center;
+            font-weight: 800 !important;
+            color: #1a3c66 !important;
+        }
 
-    .glass-box {
-        background: rgba(255,255,255,0.7);
-        border: 1px solid rgba(200,200,200,0.4);
-        backdrop-filter: blur(8px);
-        border-radius: 14px;
-        padding: 20px;
-        margin-bottom: 20px;
-    }
+        /* Upload box */
+        .stFileUploader {
+            border: 2px dashed #639bff !important;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.7);
+        }
 
-    h1, h2, h3, label, .stTextInput > label, .stFileUploader > label {
-        color: #0f172a !important;
-        font-weight: 600;
-    }
+        /* Buttons */
+        .stButton > button {
+            background: #4b8ae6;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s ease;
+            width: 100%;
+        }
+        .stButton > button:hover {
+            background: #3a7bd5;
+            transform: translateY(-2px);
+        }
 
-    div.stButton > button {
-        width: 100%;
-        padding: 10px;
-        border-radius: 10px;
-        font-weight: 600;
-        border: none;
-        background: #4f46e5;
-        color: white;
-        transition: 0.15s ease-in-out;
-    }
-    div.stButton > button:hover {
-        background: #4338ca;
-    }
+        /* Input box */
+        .stTextInput > div > div > input {
+            border-radius: 8px;
+            border: 2px solid #4b8ae6;
+        }
 
-    textarea, .stTextInput input {
-        background: rgba(255,255,255,0.9) !important;
-        color: #000 !important;
-        border-radius: 8px !important;
-        border: 1px solid rgba(150,150,150,0.5) !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+        /* Make content centered and wide */
+        .block-container {
+            max-width: 900px;
+            padding-top: 20px;
+            margin: auto;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            padding: 12px;
+            opacity: 0.9;
+            font-weight: 500;
+            color: #1a3c66;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: inherit; /* Keep same color */
+            font-weight: 700;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        </style>
+
+        <div class="footer">
+            Made by <a href="https://www.linkedin.com/in/ansh-chopra-/" target="_blank">Ansh</a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 def main():
