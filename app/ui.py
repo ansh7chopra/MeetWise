@@ -81,7 +81,7 @@ def apply_style():
         </style>
 
         <div class="footer">
-            Made by <a href="https://www.linkedin.com/in/ansh-chopra-/" target="_blank">Ansh</a>
+            Made by <a href="https://www.linkedin.com/in/ansh-chopra-a73174235?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Ansh</a>
         </div>
         """,
         unsafe_allow_html=True
