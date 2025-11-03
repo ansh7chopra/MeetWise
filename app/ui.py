@@ -1,53 +1,124 @@
 import streamlit as st
 from app.transcription import transcribe_audio
 from app.utils import query_llm
-from app.transcription import transcribe_audio
+
+st.set_page_config(page_title="MeetWise AI", layout="wide")
+
+def apply_style():
+    st.markdown("""
+    <style>
+    .stApp {
+        background: linear-gradient(135deg, #e0f7fa, #e8eaf6);
+        color: #1a1a1a;
+    }
+
+    .block-container {
+        max-width: 95% !important;
+        padding-top: 2rem;
+    }
+
+    .glass-box {
+        background: rgba(255,255,255,0.7);
+        border: 1px solid rgba(200,200,200,0.4);
+        backdrop-filter: blur(8px);
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    h1, h2, h3, label, .stTextInput > label, .stFileUploader > label {
+        color: #0f172a !important;
+        font-weight: 600;
+    }
+
+    div.stButton > button {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: 600;
+        border: none;
+        background: #4f46e5;
+        color: white;
+        transition: 0.15s ease-in-out;
+    }
+    div.stButton > button:hover {
+        background: #4338ca;
+    }
+
+    textarea, .stTextInput input {
+        background: rgba(255,255,255,0.9) !important;
+        color: #000 !important;
+        border-radius: 8px !important;
+        border: 1px solid rgba(150,150,150,0.5) !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 
 def main():
-    st.set_page_config(page_title="MeetWise - AI Meeting Assistant")
-    st.title(" MeetWise - AI Meeting Summarizer")
+    apply_style()
 
-    audio_file = st.file_uploader("Upload your meeting audio file", type=["mp3", "wav", "m4a"])
+    st.title("MeetWise — AI Meeting Assistant")
 
-    # Diarization toggle
-    diarize = st.checkbox("Enable Speaker Diarization (Experimental)", value=False)
+    col1, col2 = st.columns([1.3, 1])
 
-    preset_prompts = {
-        " Get Summary": "Summarize this meeting.",
-        " Key Points": "Extract key discussion points from the meeting.",
-        " Action Items": "List action items discussed in this meeting.",
-    }
+    if "transcript" not in st.session_state:
+        st.session_state.transcript = ""
+    if "response" not in st.session_state:
+        st.session_state.response = ""
 
-    selected_prompt = ""
+    # -------- LEFT PANEL --------
+    with col1:
+        st.markdown('<div class="glass-box">', unsafe_allow_html=True)
+        st.subheader("🎧 Upload & Transcribe")
 
-    if audio_file:
-        st.success("Audio file uploaded!")
+        audio = st.file_uploader("Upload audio (mp3/wav/m4a)", type=["mp3", "wav", "m4a"])
 
-        st.subheader("Select a prompt or enter your own:")
-        col1, col2, col3 = st.columns(3)
-        if col1.button(" Get Summary"):
-            selected_prompt = preset_prompts[" Get Summary"]
-        if col2.button(" Key Points"):
-            selected_prompt = preset_prompts[" Key Points"]
-        if col3.button(" Action Items"):
-            selected_prompt = preset_prompts[" Action Items"]
+        if audio and st.button("Transcribe Audio 📝"):
+            with st.spinner("Transcribing..."):
+                st.session_state.transcript = transcribe_audio(audio)
+            st.success("✅ Transcription Complete")
 
-        custom_prompt = st.text_input("Or enter a custom prompt:")
-        if custom_prompt:
-            selected_prompt = custom_prompt
+        st.text_area("Transcript", value=st.session_state.transcript, height=300)
 
-        if selected_prompt:
-            with st.spinner("Transcribing audio..."):
-                transcript = transcribe_audio(audio_file, diarize=diarize)
+        st.markdown("</div>", unsafe_allow_html=True)
 
-            with st.spinner("Generating response from LLM..."):
-                response = query_llm(transcript, selected_prompt)
+    # -------- RIGHT PANEL --------
+    with col2:
+        st.markdown('<div class="glass-box">', unsafe_allow_html=True)
+        st.subheader("🤖 Ask MeetWise")
 
-            st.subheader(" Transcript")
-            st.text_area("Transcription", value=transcript, height=300)
+        # Summary Button
+        if st.button("✨ Get Summary"):
+            if st.session_state.transcript.strip() == "":
+                st.warning("Upload and transcribe audio first.")
+            else:
+                with st.spinner("Generating summary..."):
+                    st.session_state.response = query_llm(st.session_state.transcript, "Summarize this meeting")
+                st.success("✅ Summary Ready")
 
-            st.subheader(" LLM Response")
-            st.text_area("Result", value=response, height=300)
+        # Custom prompt input
+        prompt = st.text_input("Enter custom prompt")
+
+        if st.button("Generate Response"):
+            if st.session_state.transcript.strip() == "":
+                st.warning("Upload and transcribe audio first.")
+            elif prompt.strip() == "":
+                st.warning("Enter a prompt.")
+            else:
+                with st.spinner("Generating response..."):
+                    st.session_state.response = query_llm(
+                        st.session_state.transcript, prompt
+                    )
+                st.success("✅ Done")
+
+        st.text_area("MeetWise Output", value=st.session_state.response, height=300)
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
+
+if __name__ == "__main__":
+    main()
+
 
 # streamlit run run.py
