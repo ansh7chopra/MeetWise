@@ -1,4 +1,5 @@
 # 🎙️ MeetWise - AI Meeting Summarizer
+**live link** -https://meetwise-jqgsftugmrgzczmaehjmqd.streamlit.app
 
 MeetWise is a powerful AI-powered app that **transcribes**, **summarizes**, and **analyzes** meeting audio files to extract:
 - 📄 Detailed summaries  
@@ -44,3 +45,4 @@ cd MeetWise
 ## 🙋‍♂️ Author
 @ansh7chopra
 Built with ❤️ as part of an AI/LLM project portfolio.
+
